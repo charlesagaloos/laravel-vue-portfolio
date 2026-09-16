@@ -1,0 +1,105 @@
+<script setup lang="ts">
+import type { Project } from "@/data/projects";
+
+defineProps<{
+    project: Project;
+    index: number;
+}>();
+</script>
+
+<template>
+    <article
+        class="reveal-item group relative flex min-h-[420px] flex-col overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/40 p-7 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-slate-700 hover:bg-slate-900/70">
+        <!-- Subtle top-right background glow -->
+        <div
+            class="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-white/[0.03] blur-3xl transition-all duration-700 group-hover:scale-150 group-hover:bg-blue-400/[0.05]">
+        </div>
+
+        <!-- Hover highlight -->
+        <div
+            class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+        </div>
+
+        <div class="relative z-10 flex flex-1 flex-col">
+            <!-- Project header -->
+            <div class="flex items-center justify-between">
+                <span
+                    class="font-mono text-sm text-slate-600 transition-colors duration-300 group-hover:text-blue-400/70">
+                    {{ String(index + 1).padStart(2, "0") }}
+                </span>
+
+                <span v-if="project.status" class="font-mono text-xs uppercase tracking-[0.15em] text-slate-600">
+                    {{ project.status }}
+                </span>
+            </div>
+
+            <!-- Project preview -->
+            <div v-if="project.preview"
+                class="mt-6 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/60">
+                <img :src="project.preview" :alt="`${project.title} project preview`"
+                    class="h-44 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
+            </div>
+
+            <!-- Project information -->
+            <div class="mt-8">
+                <div
+                    class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-medium uppercase tracking-[0.15em]">
+                    <span class="text-blue-400/80">
+                        {{ project.type }}
+                    </span>
+                </div>
+
+                <h3
+                    class="mt-3 text-2xl font-semibold tracking-tight text-white transition-transform duration-500 group-hover:translate-x-1">
+                    {{ project.title }}
+                </h3>
+
+                <p class="mt-5 leading-7 text-slate-400">
+                    {{ project.description }}
+                </p>
+            </div>
+
+            <!-- Project metadata -->
+            <div class="mt-auto pt-8">
+                <!-- Role -->
+                <p v-if="project.role" class="mb-4 font-mono text-xs uppercase tracking-[0.12em] text-slate-500">
+                    {{ project.role }}
+                </p>
+
+                <!-- Technologies -->
+                <div class="flex flex-wrap gap-2">
+                    <span v-for="technology in project.technologies" :key="technology"
+                        class="rounded-full border border-slate-800 bg-slate-950/50 px-3 py-1 font-mono text-xs text-slate-400 transition-all duration-300 group-hover:border-slate-700 group-hover:text-slate-300">
+                        {{ technology }}
+                    </span>
+                </div>
+
+                <!-- Links -->
+                <div class="mt-6 flex flex-wrap gap-5">
+                    <!-- Single project URL -->
+                    <a v-if="project.url" :href="project.url" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 text-sm font-medium text-white transition-colors duration-300 hover:text-blue-400">
+                        View Project
+
+                        <span class="transition-transform duration-300 group-hover:translate-x-1">
+                            →
+                        </span>
+                    </a>
+
+                    <!-- Multiple project links -->
+                    <template v-if="project.links">
+                        <a v-for="link in project.links" :key="link.url" :href="link.url" target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 text-sm font-medium text-white transition-colors duration-300 hover:text-blue-400">
+                            {{ link.label }}
+
+                            <span class="transition-transform duration-300 group-hover:translate-x-1">
+                                →
+                            </span>
+                        </a>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </article>
+</template>
