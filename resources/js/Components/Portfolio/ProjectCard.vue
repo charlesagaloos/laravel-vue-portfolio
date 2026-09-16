@@ -5,6 +5,10 @@ defineProps<{
     project: Project;
     index: number;
 }>();
+
+const emit = defineEmits<{
+    viewDetails: [];
+}>();
 </script>
 
 <template>
@@ -75,7 +79,7 @@ defineProps<{
                 </div>
 
                 <!-- Links -->
-                <div class="mt-6 flex flex-wrap gap-5">
+                <div class="mt-6 flex flex-wrap items-center gap-5">
                     <!-- Single project URL -->
                     <a v-if="project.url" :href="project.url" target="_blank" rel="noopener noreferrer"
                         class="inline-flex items-center gap-2 text-sm font-medium text-white transition-colors duration-300 hover:text-blue-400">
@@ -98,6 +102,19 @@ defineProps<{
                             </span>
                         </a>
                     </template>
+
+                    <!-- View Details -->
+                    <button v-if="project.problem || project.solution || project.impact" type="button"
+                        class="group/details inline-flex items-center gap-2 text-sm font-medium text-blue-400 transition-colors duration-300 hover:text-blue-300"
+                        @click="emit('viewDetails')">
+                        View Details
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor"
+                            class="h-4 w-4 transition-all duration-300 group-hover/details:-translate-y-1 group-hover/details:translate-x-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
