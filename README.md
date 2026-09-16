@@ -12,8 +12,8 @@ The portfolio showcases my experience as a Full-Stack Engineer, selected project
 - **TypeScript**
 - **Tailwind CSS**
 - **Vite**
-- **MySQL**
 - **PHP 8.3+**
+- **SQLite**
 
 ## Features
 
