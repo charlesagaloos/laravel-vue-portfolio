@@ -3,7 +3,7 @@ const email = "charlesagaloos1204@gmail.com";
 </script>
 
 <template>
-    <section id="contact" class="reveal relative overflow-hidden px-6 py-32 sm:py-40">
+    <section id="contact" class="reveal relative overflow-hidden px-6 py-20 sm:py-28">
         <!-- Ambient background -->
         <div
             class="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/[0.05] blur-[120px]">
@@ -19,14 +19,15 @@ const email = "charlesagaloos1204@gmail.com";
 
                     <h2
                         class="reveal-item mt-6 max-w-4xl text-5xl font-semibold tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl">
-                        Let's build something
-                        <span class="text-slate-500">meaningful.</span>
+                        Have a business problem
+                        <span class="text-slate-500">to solve?</span>
                     </h2>
 
                     <p class="reveal-item mt-8 max-w-xl text-lg leading-8 text-slate-400">
-                        I'm open to full-time opportunities, freelance
-                        projects, and collaborations involving full-stack web
-                        development.
+                        Tell me what is slowing your business down, what you
+                        want to build, or where your current system falls
+                        short. We can turn the idea into a clear, practical
+                        next step.
                     </p>
 
                     <!-- Email -->
@@ -46,16 +47,15 @@ const email = "charlesagaloos1204@gmail.com";
 
                     <!-- Resume -->
                     <div class="reveal-item mt-8">
-                        <a href="/Charles_Agaloos_FullStack_Engineer_Resume.pdf" target="_blank"
-                            rel="noopener noreferrer"
-                            class="group inline-flex items-center gap-3 rounded-full border border-slate-700 px-5 py-2.5 text-sm font-medium text-slate-300 transition-all duration-300 hover:border-slate-500 hover:bg-white/[0.03] hover:text-white">
-                            <span>Download Resume</span>
+                        <a href="/resume"
+                            class="theme-resume-cta group inline-flex items-center gap-3 rounded-full border border-slate-700 px-5 py-2.5 text-sm font-medium text-slate-300 transition-all duration-300 hover:border-slate-500 hover:bg-white/[0.03] hover:text-white">
+                            <span>View My Resume</span>
 
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor"
                                 class="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" />
+                                    d="m9 18 6-6-6-6M5 12h10" />
                             </svg>
                         </a>
                     </div>
@@ -135,14 +135,6 @@ const email = "charlesagaloos1204@gmail.com";
                         </a>
                     </div>
                 </div>
-            </div>
-
-            <!-- Bottom line -->
-            <div
-                class="reveal-item mt-24 flex flex-col gap-3 border-t border-slate-800 pt-6 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
-                <p>Available for new opportunities.</p>
-
-                <p>© 2026 Charles Agaloos</p>
             </div>
         </div>
     </section>

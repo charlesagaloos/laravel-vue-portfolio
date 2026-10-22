@@ -1,22 +1,27 @@
+<script setup lang="ts">
+import HeroVisual from "@/Components/Portfolio/HeroVisual.vue";
+</script>
+
 <template>
-    <section class="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-20">
+    <section class="relative flex min-h-[calc(100vh-5rem)] items-center justify-center overflow-hidden px-6 pb-12 pt-20">
         <!-- Background glow -->
         <div
             class="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/10 blur-3xl">
         </div>
 
-        <div class="relative max-w-4xl text-center">
+        <div class="relative grid w-full max-w-6xl items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <div class="text-center lg:text-left">
             <!-- Status -->
             <div
                 class="hero-item mb-6 inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-4 py-2 text-sm text-slate-400 backdrop-blur">
                 <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
 
-                Ready to build. Happy to help.
+                Available for new projects.
             </div>
 
             <!-- Title -->
             <p class="hero-item mb-4 text-sm uppercase tracking-[0.3em] text-slate-500">
-                Full Stack Engineer
+                Full-Stack Engineer · Business Systems Builder
             </p>
 
             <h1 class="hero-item text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
@@ -25,17 +30,17 @@
 
             <!-- Description -->
             <p class="hero-item mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-400 md:text-xl">
-                I build and maintain full-stack web applications with
-                <span class="text-slate-200">Laravel, PHP, MySQL,</span>
-                and
-                <span class="text-slate-200">JavaScript.</span>
+                I help businesses turn complex ideas and operational problems
+                into reliable web systems. From the first requirement to a
+                production-ready product, I build software that makes work
+                clearer, faster, and easier to maintain.
             </p>
 
             <!-- Actions -->
-            <div class="hero-item mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <div class="hero-item mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
                 <a href="#projects"
-                    class="rounded-xl bg-white px-6 py-3 font-medium text-slate-950 transition hover:-translate-y-0.5 hover:bg-slate-200">
-                    View Projects
+                    class="theme-primary-cta rounded-xl bg-white px-6 py-3 font-medium text-slate-950 transition hover:-translate-y-0.5 hover:bg-slate-200">
+                    See How I Can Help
                 </a>
 
                 <a href="#contact"
@@ -46,7 +51,7 @@
 
             <!-- Technology line -->
             <div
-                class="hero-item mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-slate-600">
+                class="hero-item mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-slate-600 lg:justify-start">
                 <span>Laravel</span>
                 <span>•</span>
                 <span>PHP</span>
@@ -57,6 +62,9 @@
                 <span>•</span>
                 <span>REST APIs</span>
             </div>
+            </div>
+
+            <HeroVisual />
         </div>
     </section>
 </template>

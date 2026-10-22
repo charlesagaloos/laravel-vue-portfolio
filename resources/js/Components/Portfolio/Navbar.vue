@@ -1,14 +1,80 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { Icon } from "@iconify/vue";
+import { Link } from "@inertiajs/vue3";
+import { onMounted, onUnmounted, ref } from "vue";
+import { useTheme } from "@/Composables/useTheme";
 
 const isOpen = ref(false);
+const { isLightTheme, initializeTheme, toggleTheme } = useTheme();
+const themeToggleButton = ref<HTMLButtonElement | null>(null);
 
 const closeMenu = () => {
     isOpen.value = false;
 };
 
+const handleThemeShortcut = (event: KeyboardEvent) => {
+    if (event.ctrlKey && event.key.toLowerCase() === "d") {
+        event.preventDefault();
+        startThemeTransition();
+    }
+};
 
-const dots = [];
+const startThemeTransition = (event?: MouseEvent) => {
+    const source = (event?.currentTarget as HTMLElement | null) ?? themeToggleButton.value;
+    const bounds = source?.getBoundingClientRect();
+    const hasVisibleSource = Boolean(bounds && bounds.width > 0 && bounds.height > 0);
+    const root = document.documentElement;
+
+    root.style.setProperty("--theme-wave-x", `${hasVisibleSource ? bounds!.left + bounds!.width / 2 : window.innerWidth / 2}px`);
+    root.style.setProperty("--theme-wave-y", `${hasVisibleSource ? bounds!.top + bounds!.height / 2 : window.innerHeight / 2}px`);
+
+    const transitionDocument = document as Document & {
+        startViewTransition?: (callback: () => void) => unknown;
+    };
+
+    if (transitionDocument.startViewTransition) {
+        transitionDocument.startViewTransition(() => {
+            toggleTheme();
+        });
+
+        return;
+    }
+
+    root.dataset.themeTransitionTo = isLightTheme.value ? "dark" : "light";
+    root.classList.add("theme-transitioning");
+
+    const finishThemeTransition = (animationEvent?: AnimationEvent) => {
+        if (!root.classList.contains("theme-transitioning")) {
+            return;
+        }
+
+        if (animationEvent && animationEvent.animationName !== "theme-wave-reveal") {
+            return;
+        }
+
+        toggleTheme();
+        root.classList.remove("theme-transitioning");
+        delete root.dataset.themeTransitionTo;
+        root.removeEventListener("animationend", finishThemeTransition);
+    };
+
+    root.addEventListener("animationend", finishThemeTransition);
+
+    // Fallback for browsers that do not dispatch animationend for pseudo-elements.
+    window.setTimeout(() => finishThemeTransition(), 750);
+};
+
+onMounted(() => {
+    initializeTheme();
+    window.addEventListener("keydown", handleThemeShortcut);
+});
+
+onUnmounted(() => {
+    window.removeEventListener("keydown", handleThemeShortcut);
+});
+
+
+const dots: Array<{ x: number; y: number; radius: number }> = [];
 
 const step = 3.2;
 const centerY = 24;
@@ -48,7 +114,7 @@ for (let x = startX; x <= endX; x += step) {
             <!-- Navbar top -->
             <div class="flex items-center justify-between px-5 py-3">
                 <!-- Logo -->
-                <a href="#" class="group flex items-center gap-3" @click="closeMenu">
+                <Link href="/" class="group flex items-center gap-3" @click="closeMenu">
                     <!-- Dot Diamond Logo -->
                     <svg viewBox="0 0 48 48"
                         class="h-9 w-9 overflow-visible transition-transform duration-500 group-hover:scale-105"
@@ -70,26 +136,34 @@ for (let x = startX; x <= endX; x += step) {
                     <span class="hidden text-sm font-semibold tracking-[0.18em] text-white sm:block">
                         CHARLES AGALOOS
                     </span>
-                </a>
+                </Link>
 
 
                 <!-- Desktop Navigation -->
                 <div class="hidden items-center gap-5 text-sm text-slate-400 md:flex">
-                    <a href="#about" class="transition-colors duration-300 hover:text-white">
+                    <Link href="/about" class="transition-colors duration-300 hover:text-white">
                         About
-                    </a>
+                    </Link>
 
-                    <a href="#skills" class="transition-colors duration-300 hover:text-white">
-                        Skills
-                    </a>
+                    <Link href="/experience" class="transition-colors duration-300 hover:text-white">
+                        Experience
+                    </Link>
 
-                    <a href="#projects" class="transition-colors duration-300 hover:text-white">
+                    <Link href="/projects" class="transition-colors duration-300 hover:text-white">
                         Projects
-                    </a>
+                    </Link>
 
-                    <a href="#contact" class="transition-colors duration-300 hover:text-white">
+                    <Link href="/contact" class="transition-colors duration-300 hover:text-white">
                         Contact
-                    </a>
+                    </Link>
+
+                    <button type="button"
+                        ref="themeToggleButton"
+                        class="ml-2 flex h-9 items-center gap-2 rounded-lg border border-slate-800 px-3 text-slate-400 transition-all duration-300 hover:border-slate-600 hover:bg-white/[0.03] hover:text-white"
+                        :aria-label="isLightTheme ? 'Switch to dark theme' : 'Switch to light theme'"
+                        aria-keyshortcuts="Control+D" title="Toggle theme (Ctrl+D)" @click="startThemeTransition">
+                        <Icon :icon="isLightTheme ? 'lucide:moon' : 'lucide:sun'" class="h-4 w-4" />
+                    </button>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -116,29 +190,38 @@ for (let x = startX; x <= endX; x += step) {
                 <div class="overflow-hidden">
                     <div class="border-t border-slate-800/80 px-5 pb-5 pt-3">
                         <div class="flex flex-col">
-                            <a href="#about"
+                            <Link href="/about"
                                 class="rounded-lg px-3 py-3 text-sm text-slate-400 transition-colors duration-300 hover:bg-white/[0.03] hover:text-white"
                                 @click="closeMenu">
                                 About
-                            </a>
+                            </Link>
 
-                            <a href="#skills"
+                            <Link href="/experience"
                                 class="rounded-lg px-3 py-3 text-sm text-slate-400 transition-colors duration-300 hover:bg-white/[0.03] hover:text-white"
                                 @click="closeMenu">
-                                Skills
-                            </a>
+                                Experience
+                            </Link>
 
-                            <a href="#projects"
+                            <Link href="/projects"
                                 class="rounded-lg px-3 py-3 text-sm text-slate-400 transition-colors duration-300 hover:bg-white/[0.03] hover:text-white"
                                 @click="closeMenu">
                                 Projects
-                            </a>
+                            </Link>
 
-                            <a href="#contact"
+                            <Link href="/contact"
                                 class="rounded-lg px-3 py-3 text-sm text-slate-400 transition-colors duration-300 hover:bg-white/[0.03] hover:text-white"
                                 @click="closeMenu">
                                 Contact
-                            </a>
+                            </Link>
+
+                            <button type="button"
+                                class="mt-2 flex items-center gap-3 rounded-lg px-3 py-3 text-left text-sm text-slate-400 transition-colors duration-300 hover:bg-white/[0.03] hover:text-white"
+                                :aria-label="isLightTheme ? 'Switch to dark theme' : 'Switch to light theme'"
+                                aria-keyshortcuts="Control+D" @click="startThemeTransition">
+                                <Icon :icon="isLightTheme ? 'lucide:moon' : 'lucide:sun'" class="h-4 w-4" />
+                                {{ isLightTheme ? "Dark theme" : "Light theme" }}
+                                <span class="ml-auto text-xs text-slate-600">Ctrl+D</span>
+                            </button>
                         </div>
                     </div>
                 </div>

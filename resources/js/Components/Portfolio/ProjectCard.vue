@@ -32,9 +32,14 @@ const emit = defineEmits<{
                     {{ String(index + 1).padStart(2, "0") }}
                 </span>
 
-                <span v-if="project.status" class="font-mono text-xs uppercase tracking-[0.15em] text-slate-600">
-                    {{ project.status }}
-                </span>
+                <div class="flex items-center gap-3">
+                    <span v-if="project.badge" class="project-badge rounded-full border border-blue-400/20 bg-blue-400/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-blue-300">
+                        {{ project.badge }}
+                    </span>
+                    <span v-if="project.status" class="font-mono text-xs uppercase tracking-[0.15em] text-slate-600">
+                        {{ project.status }}
+                    </span>
+                </div>
             </div>
 
             <!-- Project preview -->
@@ -107,7 +112,7 @@ const emit = defineEmits<{
                     <button v-if="project.problem || project.solution || project.impact" type="button"
                         class="group/details inline-flex items-center gap-2 text-sm font-medium text-blue-400 transition-colors duration-300 hover:text-blue-300"
                         @click="emit('viewDetails')">
-                        View Details
+                        See the Business Challenge
 
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor"

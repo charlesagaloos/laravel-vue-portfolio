@@ -10,6 +10,7 @@ export interface Project {
     technologies: string[];
     role: string;
     status?: string;
+    badge?: string;
     preview?: string;
     url?: string;
     clientType: "international" | "local";
@@ -21,21 +22,56 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        title: "Key Point Learning App Platform",
+        type: "Online Education Platform",
+        description:
+            "A production Laravel-based learning platform supporting education workflows, dashboards, curriculum, programs, sessions, and platform integrations.",
+        technologies: ["Laravel", "PHP", "MySQL", "Mailcoach", "Stripe", "JavaScript"],
+        role: "Independent Full-Stack Laravel Engineer",
+        status: "In progress",
+        badge: "Most recent",
+        clientType: "international",
+        problem:
+            "The client needed a dependable platform to manage learning operations, programs, sessions, curriculum, communication, and supporting business workflows in one place.",
+        solution:
+            "Developing Laravel and PHP features across the application, including backend logic, dashboards, affiliate tools, curriculum management, program/session workflows, Mailcoach integration, and Stripe-related functionality.",
+        impact:
+            "Helping the client continue improving a central learning platform with clearer workflows, maintainable features, and a stronger foundation for future education operations.",
+    },
+
+    {
         title: "Steven P. Official Website",
         type: "E-commerce & Artist Portfolio",
         description:
-            "An e-commerce and artist portfolio website currently under development for an independent music artist.",
-        technologies: ["Laravel", "PHP", "MySQL", "JavaScript"],
-        role: "Full-Stack Development",
-        status: "Current",
+            "A WordPress e-commerce and artist portfolio website currently under development for an independent R&B artist.",
+        technologies: ["WordPress", "PHP", "JavaScript", "CMS"],
+        role: "WordPress Development",
+        status: "In progress",
         url: "https://stevenpofficial.com/",
         clientType: "local",
         problem:
             "The artist needed a dedicated online platform to showcase their music, personal brand, and products while providing an integrated e-commerce experience.",
         solution:
-            "Developing a custom Laravel-based website combining an artist portfolio with e-commerce functionality, including product management and a tailored user experience.",
+            "Developing and customizing a WordPress website that combines the artist’s portfolio with an e-commerce experience for digital vocal mixing templates and vocal chains.",
         impact:
             "Creating a centralized digital platform for the artist's brand, music, and products while providing a foundation for future online sales and content.",
+    },
+
+    {
+        title: "LIRA",
+        type: "Open-source Artist Portfolio Platform",
+        description:
+            "An open-source platform in active development that helps independent artists build, customize, and share a dedicated creative presence on the web.",
+        technologies: ["Laravel", "PHP", "MySQL", "Vite", "React", "TypeScript", "Inertia.js", "Tailwind CSS"],
+        role: "Founder & Full-Stack Developer",
+        status: "In development",
+        clientType: "local",
+        problem:
+            "Independent artists often rely on scattered social media profiles, making it difficult to bring their work, identity, links, and contact information together in one place.",
+        solution:
+            "Building a customizable portfolio platform where artists can create profiles, organize creative projects, add images, videos, music, and external links, preview changes, and publish a shareable public portfolio.",
+        impact:
+            "LIRA is creating a simpler path for artists to own their online presence, present their work professionally, and build a foundation for future features such as analytics, custom domains, booking inquiries, and digital products.",
     },
 
     {
@@ -75,10 +111,6 @@ export const projects: Project[] = [
             {
                 label: "Remate.ph",
                 url: "https://remate.ph/",
-            },
-            {
-                label: "Remate Express",
-                url: "https://remateexpress.ph/",
             },
         ],
     },

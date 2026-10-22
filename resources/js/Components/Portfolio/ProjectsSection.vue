@@ -1,10 +1,22 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import ProjectCard from "@/Components/Portfolio/ProjectCard.vue";
 import { projects } from "@/data/projects";
 import type { Project } from "@/data/projects";
 
 const selectedProject = ref<Project | null>(null);
+
+const props = withDefaults(defineProps<{
+    showPersonalProjects?: boolean;
+}>(), {
+    showPersonalProjects: false,
+});
+
+const displayedProjects = computed(() =>
+    props.showPersonalProjects
+        ? projects
+        : projects.filter((project) => project.title !== "LIRA"),
+);
 
 const openProjectDetails = (project: Project) => {
     selectedProject.value = project;
@@ -13,6 +25,10 @@ const openProjectDetails = (project: Project) => {
 const closeProjectDetails = () => {
     selectedProject.value = null;
 };
+
+watch(selectedProject, (project) => {
+    document.body.style.overflow = project ? "hidden" : "";
+});
 
 const handleEscape = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
@@ -26,11 +42,12 @@ onMounted(() => {
 
 onUnmounted(() => {
     window.removeEventListener("keydown", handleEscape);
+    document.body.style.overflow = "";
 });
 </script>
 
 <template>
-    <section id="projects" class="reveal px-6 py-24">
+    <section id="projects" class="reveal px-6 py-16 md:py-20">
         <div class="mx-auto max-w-6xl">
             <!-- Section heading -->
             <div class="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
@@ -40,32 +57,32 @@ onUnmounted(() => {
                     </p>
 
                     <h2 class="reveal-item mt-3 text-3xl font-bold md:text-4xl">
-                        Projects I've worked on.
+                        Systems built around real business needs.
                     </h2>
                 </div>
 
                 <p class="reveal-item max-w-md leading-7 text-slate-400">
-                    A selection of web applications, business systems, and
-                    production websites built and maintained throughout my
-                    career.
+                    Explore examples of how I turn business challenges, manual
+                    workflows, and new ideas into useful systems and products.
                 </p>
             </div>
 
             <!-- Projects -->
             <div class="grid gap-6 md:grid-cols-2">
-                <ProjectCard v-for="(project, index) in projects" :key="project.title" :project="project" :index="index"
+                <ProjectCard v-for="(project, index) in displayedProjects" :key="project.title" :project="project" :index="index"
                     @view-details="openProjectDetails(project)" />
             </div>
         </div>
 
         <!-- Project Details Modal -->
-        <div v-if="selectedProject" class="fixed inset-0 z-[100] flex items-center justify-center px-6 py-8">
+        <Teleport to="body">
+        <div v-if="selectedProject" class="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden overscroll-none px-6 py-8" role="dialog" aria-modal="true" aria-label="Project details">
             <!-- Backdrop -->
-            <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md" @click="closeProjectDetails"></div>
+            <div class="project-modal-backdrop absolute inset-0 backdrop-blur-md" @click.self="closeProjectDetails"></div>
 
             <!-- Modal -->
             <div
-                class="relative z-10 max-h-[85vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-slate-800 bg-slate-950 p-7 shadow-2xl shadow-black/40 md:p-10">
+                class="project-modal-panel relative z-10 max-h-[calc(100vh-4rem)] w-full max-w-3xl overscroll-contain overflow-y-auto rounded-3xl border border-slate-800 bg-slate-950 p-7 shadow-2xl shadow-black/40 md:p-10">
                 <!-- Top line -->
                 <div
                     class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/50 to-transparent">
@@ -75,7 +92,9 @@ onUnmounted(() => {
                 <button type="button" aria-label="Close project details"
                     class="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full border border-slate-800 text-slate-500 transition-all duration-300 hover:border-slate-700 hover:bg-slate-900 hover:text-white"
                     @click="closeProjectDetails">
-                    ×
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6 6 18" />
+                    </svg>
                 </button>
 
                 <!-- Modal header -->
@@ -106,7 +125,7 @@ onUnmounted(() => {
                             </span>
 
                             <h3 class="font-mono text-xs uppercase tracking-[0.2em] text-slate-300">
-                                Problem
+                                The Challenge
                             </h3>
                         </div>
 
@@ -123,7 +142,7 @@ onUnmounted(() => {
                             </span>
 
                             <h3 class="font-mono text-xs uppercase tracking-[0.2em] text-slate-300">
-                                Solution
+                                How I Helped
                             </h3>
                         </div>
 
@@ -140,7 +159,7 @@ onUnmounted(() => {
                             </span>
 
                             <h3 class="font-mono text-xs uppercase tracking-[0.2em] text-slate-300">
-                                Impact
+                                The Result
                             </h3>
                         </div>
 
@@ -163,5 +182,6 @@ onUnmounted(() => {
                 </div>
             </div>
         </div>
+        </Teleport>
     </section>
 </template>
