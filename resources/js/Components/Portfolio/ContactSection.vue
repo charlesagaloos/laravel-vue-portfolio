@@ -1,141 +1,33 @@
 <script setup lang="ts">
-const email = "charlesagaloos1204@gmail.com";
+import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
-    <section id="contact" class="reveal relative overflow-hidden px-6 py-20 sm:py-28">
-        <!-- Ambient background -->
-        <div
-            class="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/[0.05] blur-[120px]">
-        </div>
+    <section id="contact" class="reveal relative overflow-hidden px-6 py-16 sm:py-20">
+        <div class="relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/60 px-7 py-10 shadow-2xl shadow-black/10 sm:px-10 sm:py-12 lg:px-11">
+            <div class="contact-ring pointer-events-none absolute -right-20 -top-32 h-[440px] w-[440px] rounded-full border sm:-right-8"></div>
+            <div class="contact-ring pointer-events-none absolute -right-8 -top-24 h-[360px] w-[360px] rounded-full border"></div>
+            <div class="contact-ring pointer-events-none absolute right-8 -top-16 h-[280px] w-[280px] rounded-full border"></div>
 
-        <div class="relative mx-auto max-w-6xl">
-            <div class="grid gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-                <!-- Main CTA -->
+            <div class="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                    <p class="reveal-item text-sm font-medium uppercase tracking-[0.3em] text-slate-500">
-                        Get In Touch
-                    </p>
-
-                    <h2
-                        class="reveal-item mt-6 max-w-4xl text-5xl font-semibold tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl">
-                        Have a business problem
-                        <span class="text-slate-500">to solve?</span>
+                    <p class="reveal-item text-xs font-medium uppercase tracking-[0.3em] text-slate-500">Have something in mind?</p>
+                    <h2 class="reveal-item mt-5 max-w-2xl text-4xl font-semibold tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">
+                        Let’s turn your idea<br class="hidden sm:block" /> into a <span class="text-slate-400">working system.</span>
                     </h2>
-
-                    <p class="reveal-item mt-8 max-w-xl text-lg leading-8 text-slate-400">
-                        Tell me what is slowing your business down, what you
-                        want to build, or where your current system falls
-                        short. We can turn the idea into a clear, practical
-                        next step.
-                    </p>
-
-                    <!-- Email -->
-                    <a :href="`mailto:${email}`"
-                        class="reveal-item group mt-10 inline-flex items-center gap-3 text-lg font-medium text-white">
-                        <span
-                            class="border-b border-slate-600 pb-1 transition-colors duration-300 group-hover:border-white">
-                            {{ email }}
-                        </span>
-
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor"
-                            class="h-4 w-4 text-slate-400 transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10" />
-                        </svg>
-                    </a>
-
-                    <!-- Resume -->
-                    <div class="reveal-item mt-8">
-                        <a href="/resume"
-                            class="theme-resume-cta group inline-flex items-center gap-3 rounded-full border border-slate-700 px-5 py-2.5 text-sm font-medium text-slate-300 transition-all duration-300 hover:border-slate-500 hover:bg-white/[0.03] hover:text-white">
-                            <span>View My Resume</span>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor"
-                                class="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m9 18 6-6-6-6M5 12h10" />
-                            </svg>
-                        </a>
-                    </div>
-
-                    <!-- Availability -->
-                    <p class="reveal-item mt-8 text-sm text-slate-600">
-                        Based in the Philippines · Available for remote
-                        opportunities
-                    </p>
                 </div>
 
-                <!-- Contact Links -->
-                <div class="reveal-item lg:pb-2">
-                    <div class="border-t border-slate-800">
-                        <!-- LinkedIn -->
-                        <a href="https://www.linkedin.com/in/charlesagaloos/" target="_blank" rel="noopener noreferrer"
-                            class="group flex items-center justify-between border-b border-slate-800 py-5">
-                            <div>
-                                <p
-                                    class="text-sm font-medium text-white transition-colors duration-300 group-hover:text-slate-300">
-                                    LinkedIn
-                                </p>
-
-                                <p class="mt-1 text-sm text-slate-600">
-                                    Professional profile
-                                </p>
-                            </div>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor"
-                                class="h-4 w-4 text-slate-600 transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10" />
-                            </svg>
-                        </a>
-
-                        <!-- GitHub -->
-                        <a href="https://github.com/charlesagaloos" target="_blank" rel="noopener noreferrer"
-                            class="group flex items-center justify-between border-b border-slate-800 py-5">
-                            <div>
-                                <p
-                                    class="text-sm font-medium text-white transition-colors duration-300 group-hover:text-slate-300">
-                                    GitHub
-                                </p>
-
-                                <p class="mt-1 text-sm text-slate-600">
-                                    Code & projects
-                                </p>
-                            </div>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor"
-                                class="h-4 w-4 text-slate-600 transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10" />
-                            </svg>
-                        </a>
-
-                        <!-- JobStreet -->
-                        <a href="https://ph.jobstreet.com/profiles/charlesbenjaminiii-agaloos-1b7tcMtC6B"
-                            target="_blank" rel="noopener noreferrer"
-                            class="group flex items-center justify-between border-b border-slate-800 py-5">
-                            <div>
-                                <p
-                                    class="text-sm font-medium text-white transition-colors duration-300 group-hover:text-slate-300">
-                                    JobStreet
-                                </p>
-
-                                <p class="mt-1 text-sm text-slate-600">
-                                    Job profile
-                                </p>
-                            </div>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor"
-                                class="h-4 w-4 text-slate-600 transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10" />
-                            </svg>
-                        </a>
-                    </div>
+                <div class="reveal-item flex shrink-0 flex-col items-start gap-4 lg:items-end">
+                    <Link href="/contact" class="theme-primary-cta group inline-flex items-center gap-7 rounded-xl bg-white px-6 py-4 text-sm font-medium text-slate-950 transition hover:-translate-y-0.5 hover:bg-slate-200">
+                        Let’s talk
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10" />
+                        </svg>
+                    </Link>
+                    <p class="text-sm text-slate-500">Tell me what you’re building.</p>
                 </div>
             </div>
         </div>
     </section>
 </template>
+

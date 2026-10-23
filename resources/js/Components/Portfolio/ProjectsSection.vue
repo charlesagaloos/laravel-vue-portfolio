@@ -1,22 +1,10 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from "vue";
+import { onMounted, onUnmounted, ref, watch } from "vue";
 import ProjectCard from "@/Components/Portfolio/ProjectCard.vue";
 import { projects } from "@/data/projects";
 import type { Project } from "@/data/projects";
 
 const selectedProject = ref<Project | null>(null);
-
-const props = withDefaults(defineProps<{
-    showPersonalProjects?: boolean;
-}>(), {
-    showPersonalProjects: false,
-});
-
-const displayedProjects = computed(() =>
-    props.showPersonalProjects
-        ? projects
-        : projects.filter((project) => project.title !== "LIRA"),
-);
 
 const openProjectDetails = (project: Project) => {
     selectedProject.value = project;
@@ -53,7 +41,7 @@ onUnmounted(() => {
             <div class="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
                 <div>
                     <p class="reveal-item text-sm uppercase tracking-[0.3em] text-slate-500">
-                        Selected Work
+                        Selected Client Work
                     </p>
 
                     <h2 class="reveal-item mt-3 text-3xl font-bold md:text-4xl">
@@ -62,14 +50,13 @@ onUnmounted(() => {
                 </div>
 
                 <p class="reveal-item max-w-md leading-7 text-slate-400">
-                    Explore examples of how I turn business challenges, manual
-                    workflows, and new ideas into useful systems and products.
+                    Explore examples of how I turn business challenges, manual workflows, and new ideas into useful systems and products.
                 </p>
             </div>
 
             <!-- Projects -->
             <div class="grid gap-6 md:grid-cols-2">
-                <ProjectCard v-for="(project, index) in displayedProjects" :key="project.title" :project="project" :index="index"
+                <ProjectCard v-for="(project, index) in projects.filter((project) => project.title !== 'LIRA' && project.showOnHome !== false)" :key="project.title" :project="project" :index="index" :show-preview="false"
                     @view-details="openProjectDetails(project)" />
             </div>
         </div>

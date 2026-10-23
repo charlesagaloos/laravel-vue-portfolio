@@ -19,7 +19,7 @@ useReveal();
     <main class="relative isolate min-h-screen bg-slate-950 text-white">
         <BackgroundEffects />
 
-        <div class="relative z-10">
+        <div class="relative z-10 pt-20">
             <Navbar />
 
             <HeroSection />

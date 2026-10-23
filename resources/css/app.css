@@ -15,6 +15,174 @@ html {
     scroll-padding-top: 110px;
 }
 
+/* Branded page transition used by Inertia navigation, including browser
+   back/forward actions. */
+.page-transition-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    background: transparent;
+    transition: opacity 180ms ease;
+}
+
+.page-transition-overlay.is-active {
+    opacity: 1;
+}
+
+.page-transition-wash {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 18vmax;
+    height: 18vmax;
+    border-radius: 9999px;
+    background: #020617;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.04), 0 0 100px rgb(96 165 250 / 0.12);
+    transform: translate(-50%, -50%) scale(0);
+    animation: page-transition-wash 1900ms cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+.page-transition-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    color: #ffffff;
+    animation: page-transition-content 1500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page-transition-logo {
+    width: 5rem;
+    height: 5rem;
+    filter: drop-shadow(0 0 24px rgb(96 165 250 / 0.2));
+}
+
+.page-transition-logo-box {
+    transition: opacity 300ms ease;
+}
+
+.page-transition-logo-dots {
+    fill: #60a5fa;
+}
+
+.page-transition-dot {
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+    transform: translate(var(--dot-x), var(--dot-y)) scale(0.25);
+}
+
+.page-transition-overlay.is-active .page-transition-dot {
+    animation: page-transition-dot-form 1400ms cubic-bezier(0.22, 1, 0.36, 1) var(--dot-delay) both;
+}
+
+.page-transition-overlay.is-back .page-transition-content {
+    animation-name: page-transition-content-back;
+}
+
+@keyframes page-transition-wash {
+    from { transform: translate(-50%, -50%) scale(0); }
+    to { transform: translate(-50%, -50%) scale(18); }
+}
+
+@keyframes page-transition-content {
+    from { opacity: 0; transform: translateY(0.8rem) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes page-transition-content-back {
+    from { opacity: 0; transform: translateY(-0.8rem) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes page-transition-pulse {
+    from { opacity: 0.5; transform: scale(0.94); transform-origin: center; }
+    to { opacity: 1; transform: scale(1); transform-origin: center; }
+}
+
+@keyframes page-transition-dot-form {
+    from {
+        opacity: 0;
+        transform: translate(var(--dot-x), var(--dot-y)) scale(0.25);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+html.theme-light .page-transition-overlay {
+    background: transparent;
+}
+
+html.theme-light .page-transition-wash {
+    background: #f8fafc;
+    box-shadow: 0 0 0 1px rgb(12 16 47 / 0.06), 0 0 100px rgb(12 16 47 / 0.12);
+}
+
+html.theme-light .page-transition-content {
+    color: #0c102f;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-transition-overlay,
+    .page-transition-wash,
+    .page-transition-content,
+    .page-transition-logo-dots {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .page-transition-dot {
+        opacity: 1;
+        transform: none;
+        animation: none !important;
+    }
+}
+
+/* Shared typography palette: headings, supporting text, muted text, and the
+   primary accent stay consistent across every page and theme. */
+:root {
+    --font-heading: #f8fafc;
+    --font-body: #94a3b8;
+    --font-muted: #64748b;
+    --font-accent: #ffffff;
+}
+
+html.theme-light {
+    --font-heading: #0f172a;
+    --font-body: #475569;
+    --font-muted: #64748b;
+    --font-accent: #0c102f;
+}
+
+.contact-ring {
+    border-color: rgb(255 255 255 / 0.1) !important;
+}
+
+html.theme-light .contact-ring {
+    border-color: rgb(12 16 47 / 0.22) !important;
+}
+
+html:not(.theme-light) [class*="text-blue-400"],
+html:not(.theme-light) [class*="text-blue-300"],
+html:not(.theme-light) [class*="text-indigo-400"],
+html:not(.theme-light) [class*="text-indigo-300"] {
+    color: var(--font-accent) !important;
+}
+
+html.theme-light [class*="text-blue-400"],
+html.theme-light [class*="text-blue-300"],
+html.theme-light [class*="text-indigo-400"],
+html.theme-light [class*="text-indigo-300"] {
+    color: var(--font-accent) !important;
+}
+
 /* ============================================================
    Theme Toggle
    ============================================================ */

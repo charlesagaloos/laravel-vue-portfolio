@@ -3,30 +3,28 @@ import { Icon } from "@iconify/vue";
 </script>
 
 <template>
-    <section id="client-reach" class="reveal relative overflow-hidden px-6 py-16 md:py-20">
+    <section id="client-reach" class="reveal relative overflow-hidden px-6 pb-10 pt-4 md:pb-14 md:pt-6">
         <div class="mx-auto max-w-6xl">
             <!-- Section heading -->
-            <div class="mb-14 max-w-3xl">
+            <div class="mb-8 max-w-3xl">
                 <p class="reveal-item text-xs font-semibold uppercase tracking-[0.3em] text-indigo-400">
                     Client Reach
                 </p>
 
                 <h2 class="reveal-item mt-4 max-w-3xl text-3xl font-semibold tracking-[-0.03em] text-white md:text-4xl">
-                    From business problems to systems people can rely on.
+                    From ideas to systems you can rely on.
                 </h2>
 
-                <p class="reveal-item mt-5 max-w-2xl text-base leading-7 text-slate-400">
-                    Whether you need a new platform, a better workflow, or a
-                    dependable system behind your operations, I turn complex
-                    requirements into practical software that moves the work forward.
+                <p class="reveal-item mt-4 max-w-2xl text-base leading-7 text-slate-400">
+                    I turn complex business needs into practical, reliable software.
                 </p>
             </div>
 
             <!-- Client reach -->
-            <div class="grid gap-5 md:grid-cols-2">
+            <div class="grid gap-4 md:grid-cols-2">
                 <!-- International -->
                 <article
-                    class="reach-card reveal-item group relative overflow-hidden rounded-[2rem] border border-indigo-400/20 bg-gradient-to-br from-indigo-500/[0.12] via-slate-950/70 to-slate-950/90 p-8 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-indigo-300/50 hover:shadow-[0_24px_80px_rgba(99,102,241,0.16)] md:p-9">
+                    class="reach-card reveal-item group relative overflow-hidden rounded-[2rem] border border-indigo-400/20 bg-gradient-to-br from-indigo-500/[0.12] via-slate-950/70 to-slate-950/90 p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-indigo-300/50 hover:shadow-[0_24px_80px_rgba(99,102,241,0.16)] md:p-7">
                     <!-- Glow -->
                     <div
                         class="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-indigo-500/0 blur-3xl transition-all duration-700 group-hover:bg-indigo-500/10">
@@ -51,7 +49,7 @@ import { Icon } from "@iconify/vue";
                         </div>
 
                         <!-- Content -->
-                        <div class="mt-10">
+                        <div class="mt-7">
                             <div
                                 class="flex h-14 w-14 items-center justify-center rounded-2xl border border-indigo-400/20 bg-indigo-500/10 text-indigo-300 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3">
                                 <Icon icon="lucide:globe-2" class="h-7 w-7" />
@@ -87,7 +85,7 @@ import { Icon } from "@iconify/vue";
 
                 <!-- Local -->
                 <article
-                    class="reach-card reveal-item group relative overflow-hidden rounded-[2rem] border border-slate-800/80 bg-gradient-to-br from-slate-900/80 via-slate-950/80 to-slate-950/95 p-8 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-slate-600 hover:shadow-[0_24px_80px_rgba(15,23,42,0.5)] md:p-9">
+                    class="reach-card reveal-item group relative overflow-hidden rounded-[2rem] border border-slate-800/80 bg-gradient-to-br from-slate-900/80 via-slate-950/80 to-slate-950/95 p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-slate-600 hover:shadow-[0_24px_80px_rgba(15,23,42,0.5)] md:p-7">
                     <!-- Glow -->
                     <div
                         class="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-slate-500/0 blur-3xl transition-all duration-700 group-hover:bg-slate-500/10">
@@ -112,7 +110,7 @@ import { Icon } from "@iconify/vue";
                         </div>
 
                         <!-- Content -->
-                        <div class="mt-10">
+                        <div class="mt-7">
                             <div
                                 class="flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-800 bg-slate-900 text-slate-400 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-3 group-hover:border-slate-600 group-hover:text-slate-200">
                                 <Icon icon="lucide:building-2" class="h-7 w-7" />
