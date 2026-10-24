@@ -78,7 +78,20 @@ RUN chmod +x /usr/local/bin/portfolio-entrypoint
 EXPOSE 9000
 ENTRYPOINT ["portfolio-entrypoint"]
 
-FROM nginx:1.27-alpine AS web
+# Render production web service: PHP-FPM + Nginx in one container
+FROM app AS web
 
-COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=app /var/www/html/public /var/www/html/public
+RUN apk add --no-cache nginx \
+    && mkdir -p /run/nginx /var/lib/nginx/tmp
+
+COPY docker/nginx/default.conf /etc/nginx/http.d/default.conf
+COPY docker/render-entrypoint.sh /usr/local/bin/render-entrypoint
+
+# Normalize Windows line endings and make the script executable.
+RUN sed -i 's/\r$//' /usr/local/bin/render-entrypoint \
+    && chmod +x /usr/local/bin/render-entrypoint
+
+EXPOSE 10000
+
+ENTRYPOINT ["/usr/local/bin/render-entrypoint"]
+
