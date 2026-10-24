@@ -30,7 +30,7 @@ export interface Project {
 export const projects: Project[] = [
     {
         slug: "key-point-learning",
-        title: "Key Point Learning App Platform",
+        title: "International Learning Platform",
         type: "Online Education Platform",
         year: "2026",
         description:
@@ -45,7 +45,7 @@ export const projects: Project[] = [
         solution:
             "Developing Laravel and PHP features across the application, including backend logic, dashboards, affiliate tools, curriculum management, program/session workflows, Mailcoach integration, and Stripe-related functionality.",
         approach:
-            "I work from the client’s operational requirements, break them into maintainable Laravel features, and improve the platform through direct collaboration, testing, and incremental delivery.",
+            "I work from the client's operational requirements, break them into maintainable Laravel features, and improve the platform through direct collaboration, testing, and incremental delivery.",
         before: "Education workflows and supporting business operations needed to be managed across a growing platform.",
         after: "A clearer foundation for managing learning operations, curriculum, programs, sessions, communication, and related workflows.",
         impact:
@@ -72,15 +72,15 @@ export const projects: Project[] = [
         ],
         role: "WordPress Development",
         status: "In progress",
-        preview: "/images/projects/StevenP.png",
+        preview: "/images/projects/StevenP.png?v=2",
         url: "https://stevenpofficial.com/",
         clientType: "local",
         problem:
             "The artist needed a dedicated online platform to showcase their music, personal brand, and products while providing an integrated e-commerce experience.",
         solution:
-            "Developing and customizing a WordPress website that combines the artist’s portfolio with an e-commerce experience for digital vocal mixing templates and vocal chains.",
+            "Developing and customizing a WordPress website that combines the artist's portfolio with an e-commerce experience for digital vocal mixing templates and vocal chains.",
         approach:
-            "I am shaping the website around the artist’s identity, then connecting the portfolio experience with a simple path for visitors to understand and purchase digital products.",
+            "I am shaping the website around the artist's identity, then connecting the portfolio experience with a simple path for visitors to understand and purchase digital products.",
         before: "The artist needed one dedicated place for their creative work, brand, and digital products.",
         after: "An evolving WordPress platform that brings the artist portfolio and digital product business together.",
         impact:
@@ -98,7 +98,7 @@ export const projects: Project[] = [
         technologies: ["Laravel", "PHP", "MySQL", "Vite", "React", "TypeScript", "Inertia.js", "Tailwind CSS"],
         role: "Founder & Full-Stack Developer",
         status: "In development",
-        preview: "/images/projects/LIRA.png",
+        preview: "/images/projects/LIRA.png?v=2",
         clientType: "local",
         problem:
             "Independent artists often rely on scattered social media profiles, making it difficult to bring their work, identity, links, and contact information together in one place.",
@@ -130,7 +130,7 @@ export const projects: Project[] = [
         solution:
             "Personally developed the Inventory Management, HR, and Employee Management systems, and built a new version of the Petty Cash system. Also maintained and improved existing POS, Franchise, Ordering, Transport & Logistics, Reports, and Cash Management systems.",
         approach:
-            "I worked across the backend, frontend, database, and operational workflows, improving existing modules while delivering new systems around the company’s day-to-day needs.",
+            "I worked across the backend, frontend, database, and operational workflows, improving existing modules while delivering new systems around the company's day-to-day needs.",
         before: "The business depended on multiple systems covering operations, finance, people, sales, logistics, and reporting.",
         after: "Expanded and maintained business systems that gave teams more structured support across critical operational workflows.",
         impact:
@@ -140,28 +140,28 @@ export const projects: Project[] = [
 
     {
         slug: "remate",
-        title: "Remate",
+        title: "News Media Platform",
         type: "News Media Platforms",
         year: "2021",
         description:
-            "Maintained the production Remate.ph website and developed Remate Express from the ground up as a Laravel-based news platform.",
+            "Maintained a production news website and developed a separate Laravel-based publishing platform from the ground up.",
         technologies: ["WordPress", "Laravel", "PHP", "MySQL"],
         role: "Full-Stack Development & Maintenance",
         status: "Previous",
         clientType: "local",
         problem:
-            "The client needed ongoing maintenance for its existing news website while also developing a separate platform for Remate Express.",
+            "The client needed ongoing maintenance for its existing news website while also developing a separate publishing platform.",
         solution:
-            "Maintained and updated Remate.ph while developing Remate Express from scratch using Laravel, PHP, and MySQL.",
+            "Maintained and updated the existing website while developing a separate platform from scratch using Laravel, PHP, and MySQL.",
         approach:
             "I balanced production maintenance with new platform development, keeping the existing website supported while building a Laravel-based publishing experience from the ground up.",
-        before: "The client needed continued support for its existing news website and a separate platform for Remate Express.",
-        after: "The production site remained supported while a new Laravel-based news platform was delivered for Remate Express.",
+        before: "The client needed continued support for its existing news website and a separate publishing platform.",
+        after: "The production site remained supported while a new Laravel-based news platform was delivered.",
         impact:
-            "Supported the existing production website while delivering a new Laravel-based platform for Remate Express.",
+            "Supported the existing production website while delivering a new Laravel-based publishing platform.",
         links: [
             {
-                label: "Remate.ph",
+                label: "Visit Project",
                 url: "https://remate.ph/",
             },
         ],
@@ -171,14 +171,14 @@ export const projects: Project[] = [
     {
         slug: "imos",
         title: "IMOS",
-        type: "Inventory Management System",
+        type: "Inventory Management & Ordering System",
         year: "2021",
         description:
             "An internal inventory management system developed to give the business a clearer view of stock, movement, and day-to-day inventory operations.",
         technologies: ["Laravel", "PHP", "MySQL", "JavaScript"],
         role: "Full-Stack Developer",
         status: "Previous",
-        preview: "/images/projects/iMOS_Inventory_Dashboard.png",
+        preview: "/images/projects/iMOS_Inventory_Dashboard.png?v=2",
         clientType: "local",
         problem:
             "Inventory operations needed a more structured system for managing stock information and supporting day-to-day business decisions.",
@@ -204,18 +204,18 @@ export const projects: Project[] = [
         technologies: ["Laravel", "PHP", "MySQL", "JavaScript"],
         role: "Full-Stack Developer & Maintenance",
         status: "Previous",
-        preview: "/images/projects/Cash_Management.png",
+        preview: "/images/projects/Cash_Management.png?v=2",
         clientType: "local",
         problem:
             "The business needed dependable tools to support cash-related operations across its day-to-day business processes.",
         solution:
-            "Maintained and improved the cash management workflows as part of the companyâ€™s wider suite of business management systems.",
+            "Maintained and improved the cash management workflows as part of the company's wider suite of business management systems.",
         approach:
             "I worked across existing application logic, database structures, and user workflows to keep the system reliable while improving its ability to support operations.",
         before: "Cash-related workflows were part of a wider set of operational systems that required ongoing support and improvement.",
-        after: "A more dependable cash management workflow integrated into the companyâ€™s broader business systems.",
+        after: "A more dependable cash management workflow integrated into the company's broader business systems.",
         impact:
-            "Supported clearer and more reliable financial operations within the companyâ€™s internal systems.",
+            "Supported clearer and more reliable financial operations within the company's internal systems.",
         showOnProjectsPage: true,
         showOnHome: false,
     },

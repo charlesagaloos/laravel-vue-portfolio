@@ -12,8 +12,9 @@ The portfolio showcases my experience as a Full-Stack Engineer, selected project
 - **TypeScript**
 - **Tailwind CSS**
 - **Vite**
-- **PHP 8.3+**
-- **SQLite**
+- **PHP 8.5**
+- **MySQL 8.4**
+- **Docker Compose**
 
 ## Features
 
@@ -28,6 +29,28 @@ The portfolio showcases my experience as a Full-Stack Engineer, selected project
 - Contact section
 - Responsive mobile layout
 - Dark technical/premium visual design
+
+## Docker
+
+Copy the Docker environment template and set secure passwords before starting:
+
+```bash
+cp .env.docker.example .env.docker
+# Generate a key and place it in APP_KEY inside .env.docker
+php artisan key:generate --show
+docker compose --env-file .env.docker up -d --build
+```
+
+The application will be available at `http://localhost:8080`. The Laravel app,
+Nginx web server, and MySQL database run as separate services. Migrations run
+automatically when the app container starts, and MySQL data is persisted in the
+`portfolio_mysql_data` volume.
+
+To stop the services without removing database data:
+
+```bash
+docker compose --env-file .env.docker down
+```
 
 ## Project Structure
 

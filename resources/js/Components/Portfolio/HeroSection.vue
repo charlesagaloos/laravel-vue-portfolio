@@ -1,5 +1,13 @@
 <script setup lang="ts">
 import HeroVisual from "@/Components/Portfolio/HeroVisual.vue";
+
+type RatingSummary = {
+    average: number;
+    total: number;
+    recent: Array<{ rating: number; feedback: string | null; created_at: string }>;
+};
+
+defineProps<{ ratingSummary: RatingSummary }>();
 </script>
 
 <template>
@@ -51,7 +59,7 @@ import HeroVisual from "@/Components/Portfolio/HeroVisual.vue";
 
             </div>
 
-            <HeroVisual />
+            <HeroVisual :rating-summary="ratingSummary" />
         </div>
     </section>
 </template>

@@ -36,15 +36,22 @@ html {
 
 .page-transition-wash {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 18vmax;
-    height: 18vmax;
-    border-radius: 9999px;
+    inset: 0;
+    width: auto;
+    height: auto;
+    border-radius: 0;
     background: #020617;
     box-shadow: 0 0 0 1px rgb(255 255 255 / 0.04), 0 0 100px rgb(96 165 250 / 0.12);
-    transform: translate(-50%, -50%) scale(0);
-    animation: page-transition-wash 1900ms cubic-bezier(0.65, 0, 0.35, 1) both;
+    transform: none;
+    opacity: 1;
+}
+
+.page-transition-overlay.is-initial {
+    background: #020617;
+}
+
+.page-transition-overlay.is-initial .page-transition-wash {
+    display: none;
 }
 
 .page-transition-content {
@@ -53,7 +60,6 @@ html {
     align-items: center;
     gap: 0.85rem;
     color: #ffffff;
-    animation: page-transition-content 1500ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .page-transition-logo {
@@ -78,31 +84,21 @@ html {
 }
 
 .page-transition-overlay.is-active .page-transition-dot {
-    animation: page-transition-dot-form 1400ms cubic-bezier(0.22, 1, 0.36, 1) var(--dot-delay) both;
+    animation: page-transition-dot-form 1000ms cubic-bezier(0.22, 1, 0.36, 1) var(--dot-delay) both;
 }
 
-.page-transition-overlay.is-back .page-transition-content {
-    animation-name: page-transition-content-back;
+/* Hold destination-page reveal animations until the branded page transition
+   has finished. The elements can still be observed and marked visible while
+   the overlay is active; this rule simply keeps them visually paused. */
+html.page-transition-pending .reveal,
+html.page-transition-pending .reveal-item {
+    opacity: 0 !important;
+    transform: translate3d(0, 32px, 0) scale(0.98) !important;
+    filter: blur(6px) !important;
 }
 
-@keyframes page-transition-wash {
-    from { transform: translate(-50%, -50%) scale(0); }
-    to { transform: translate(-50%, -50%) scale(18); }
-}
-
-@keyframes page-transition-content {
-    from { opacity: 0; transform: translateY(0.8rem) scale(0.96); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes page-transition-content-back {
-    from { opacity: 0; transform: translateY(-0.8rem) scale(0.96); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes page-transition-pulse {
-    from { opacity: 0.5; transform: scale(0.94); transform-origin: center; }
-    to { opacity: 1; transform: scale(1); transform-origin: center; }
+.page-transition-overlay.is-back .page-transition-wash {
+    opacity: 1;
 }
 
 @keyframes page-transition-dot-form {
@@ -116,8 +112,17 @@ html {
     }
 }
 
+@keyframes page-transition-pulse {
+    from { opacity: 0.5; transform: scale(0.94); transform-origin: center; }
+    to { opacity: 1; transform: scale(1); transform-origin: center; }
+}
+
 html.theme-light .page-transition-overlay {
     background: transparent;
+}
+
+html.theme-light .page-transition-overlay.is-initial {
+    background: #f8fafc;
 }
 
 html.theme-light .page-transition-wash {
@@ -143,6 +148,7 @@ html.theme-light .page-transition-content {
         transform: none;
         animation: none !important;
     }
+
 }
 
 /* Shared typography palette: headings, supporting text, muted text, and the
@@ -306,6 +312,40 @@ html.theme-light .availability-card {
 
 html.theme-light .availability-card .border-slate-300\/70 {
     border-color: #cbd5e1 !important;
+}
+
+html.theme-light .hero-feedback-card {
+    background: linear-gradient(145deg, #ffffff, #f1f5ff) !important;
+    background-image: linear-gradient(145deg, #ffffff, #f1f5ff) !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 16px 32px rgb(30 64 175 / 0.14) !important;
+    color: #0f172a !important;
+}
+
+html.theme-light .hero-feedback-card .text-slate-200,
+html.theme-light .hero-feedback-card .text-slate-300 {
+    color: #172554 !important;
+}
+
+html.theme-light .hero-feedback-card .text-slate-500,
+html.theme-light .hero-feedback-card .text-slate-600 {
+    color: #52637d !important;
+}
+
+html.theme-light .hero-feedback-card .border-white\/10 {
+    border-color: #dbe4f0 !important;
+}
+
+html.theme-light .hero-github-card .bg-emerald-400\/10 {
+    background-color: #dcfce7 !important;
+}
+
+html.theme-light .hero-github-card .border-emerald-400\/20 {
+    border-color: #86efac !important;
+}
+
+html.theme-light .hero-github-card .text-emerald-300 {
+    color: #047857 !important;
 }
 
 html.theme-light .project-badge {

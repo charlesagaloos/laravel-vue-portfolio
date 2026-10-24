@@ -107,14 +107,9 @@ const emit = defineEmits<{
                     <a v-if="project.url" :href="project.url" target="_blank" rel="noopener noreferrer"
                         class="inline-flex items-center gap-2 text-sm font-medium text-white transition-colors duration-300 hover:text-blue-400"
                         :class="{ 'order-2': props.compact }">
-                        {{ props.compact ? "Visit Project" : "View Project" }}
+                        Visit Project
 
-                        <svg v-if="!props.compact" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor"
-                            class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
-                        </svg>
-                        <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor"
                             class="h-4 w-4 transition-all duration-300 group-hover/details:-translate-y-1 group-hover/details:translate-x-1">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10" />

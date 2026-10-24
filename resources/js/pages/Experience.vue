@@ -13,12 +13,12 @@ const experience = [
     {
         title: "Independent Full-Stack Laravel Engineer",
         sortOrder: 1,
-        companyLabel: "Key Point Learning - International Client",
+        companyLabel: "International Education Client - Remote - Canada",
         engagement: "Remote - Canada",
-        company: "Key Point Learning · International Client",
+        company: "International Education Client · Remote · Canada",
         dates: "June 2026 - Present",
         workMode: "Remote · Canada",
-        period: "Key Point Learning · International Client · June 2026 - Present",
+        period: "International Education Client · Remote · Canada · June 2026 - Present",
         description: "Turned client requirements into dependable features for an online education platform, helping teams manage learning operations with less friction.",
         technologies: ["Laravel", "PHP", "Mailcoach", "Stripe", "MySQL"],
         details: [

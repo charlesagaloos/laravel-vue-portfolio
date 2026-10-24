@@ -1,33 +1,69 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import { Icon } from "@iconify/vue";
 
-const setupGroups = [
+type SetupItem = {
+    name: string;
+    value: string;
+    image?: string;
+};
+
+type SetupGroup = {
+    icon: string;
+    title: string;
+    items: SetupItem[];
+};
+
+const setupGroups: SetupGroup[] = [
     {
         icon: "lucide:monitor",
         title: "Desk setup",
         items: [
-            ["Main monitor", "Lenovo Legion R34w-30 34” WQHD curved, 180Hz"],
-            ["Second monitor", "ASUS VG279Q 27”"],
-            ["Keyboard", "SolaKaka A99 Pro"],
-            ["Mouse", "Logitech G304"],
+            { name: "Main monitor", value: "Lenovo Legion R34w-30 34”", image: "/images/projects/setup/main%20monitor.png" },
+            { name: "Second monitor", value: "ASUS VG279Q 27”", image: "/images/projects/setup/second%20monitor.png" },
+            { name: "Keyboard", value: "SolaKaka A99 Pro", image: "/images/projects/setup/keyboard.png" },
+            { name: "Mouse", value: "Logitech G304", image: "/images/projects/setup/mouse.png" },
         ],
     },
     {
         icon: "lucide:cpu",
         title: "Main workstation",
         items: [
-            ["Operating system", "Windows 11 Pro 64-bit"],
-            ["Processor", "AMD Ryzen 5 2600X · 6 cores / 12 threads · 3.6GHz"],
-            ["Memory", "16GB RAM"],
-            ["Graphics", "NVIDIA GeForce RTX 2060"],
+            { name: "Operating system", value: "Windows 11 Pro 64-bit" },
+            { name: "Processor", value: "AMD Ryzen 5 2600X · 6 cores / 12 threads · 3.6GHz" },
+            { name: "Memory", value: "16GB RAM" },
+            { name: "Graphics", value: "NVIDIA GeForce RTX 2060" },
         ],
     },
     {
         icon: "lucide:laptop",
         title: "Backup machine",
-        items: [["Laptop", "ASUS ROG Strix G15 G513QE-HN060T"]],
+        items: [{ name: "Laptop", value: "ASUS ROG Strix G15 G513QE-HN060T", image: "/images/projects/setup/laptop.png" }],
     },
 ];
+
+const selectedImage = ref<SetupItem | null>(null);
+
+const openImage = (item: SetupItem) => {
+    if (!item.image) return;
+    selectedImage.value = item;
+    document.body.style.overflow = "hidden";
+};
+
+const closeImage = () => {
+    selectedImage.value = null;
+    document.body.style.overflow = "";
+};
+
+const handleEscape = (event: KeyboardEvent) => {
+    if (event.key === "Escape" && selectedImage.value) closeImage();
+};
+
+onMounted(() => document.addEventListener("keydown", handleEscape));
+onBeforeUnmount(() => {
+    document.removeEventListener("keydown", handleEscape);
+    document.body.style.overflow = "";
+});
 </script>
 
 <template>
@@ -53,13 +89,34 @@ const setupGroups = [
                     </div>
 
                     <dl class="mt-6 space-y-4">
-                        <div v-for="item in group.items" :key="item[0]">
-                            <dt class="text-xs uppercase tracking-[0.15em] text-slate-500">{{ item[0] }}</dt>
-                            <dd class="mt-1 text-sm leading-6 text-slate-300">{{ item[1] }}</dd>
+                        <div v-for="item in group.items" :key="item.name">
+                            <dt class="text-xs uppercase tracking-[0.15em] text-slate-500">{{ item.name }}</dt>
+                            <div class="mt-1 flex items-start justify-between gap-3">
+                                <dd class="text-sm leading-6 text-slate-300">{{ item.value }}</dd>
+                                <button v-if="item.image" type="button"
+                                    class="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-blue-400 transition-colors hover:text-blue-300"
+                                    :aria-label="`View ${item.name} image`" @click="openImage(item)">
+                                    View
+                                    <Icon icon="lucide:eye" class="h-3.5 w-3.5" />
+                                </button>
+                            </div>
                         </div>
                     </dl>
                 </article>
             </div>
         </div>
     </section>
+
+    <Teleport to="body">
+        <div v-if="selectedImage" class="fixed inset-0 z-[10000] flex items-center justify-center bg-slate-950/85 p-6 backdrop-blur-md"
+            role="dialog" aria-modal="true" :aria-label="`${selectedImage.name} preview`" @click.self="closeImage">
+            <div class="relative max-h-[90vh] max-w-5xl overflow-hidden rounded-3xl border border-slate-700 bg-slate-900 p-3 shadow-2xl shadow-black/40">
+                <button type="button" class="absolute right-5 top-5 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-slate-600 bg-slate-950/80 text-slate-300 transition-colors hover:text-white"
+                    aria-label="Close image preview" @click="closeImage">
+                    <Icon icon="lucide:x" class="h-4 w-4" />
+                </button>
+                <img :src="selectedImage.image" :alt="`${selectedImage.name} setup image`" class="max-h-[84vh] max-w-full rounded-2xl object-contain" />
+            </div>
+        </div>
+    </Teleport>
 </template>

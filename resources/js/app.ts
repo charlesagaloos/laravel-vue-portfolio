@@ -2,6 +2,7 @@ import { createInertiaApp, router } from '@inertiajs/vue3';
 
 let transitionOverlay: HTMLDivElement | null = null;
 let transitionTimer: number | undefined;
+let transitionReleaseTimer: number | undefined;
 let historyPosition: number | null = null;
 let navigationDirection = 'forward';
 
@@ -24,7 +25,7 @@ const logoDots = (() => {
             const radius = Math.max(0.55, 1.8 - progress * 1.35);
             const offsetX = Math.round(Math.sin(index * 2.7) * 18);
             const offsetY = Math.round(Math.cos(index * 1.9) * 18);
-            const delay = (index % 10) * 35;
+            const delay = (index % 10) * 22;
             dots.push(`<circle class="page-transition-dot" cx="${x}" cy="${y}" r="${radius}" style="--dot-x:${offsetX}px;--dot-y:${offsetY}px;--dot-delay:${delay}ms" />`);
             index += 1;
         }
@@ -56,17 +57,23 @@ const ensureTransitionOverlay = () => {
     return transitionOverlay;
 };
 
-const showPageTransition = (direction = 'forward') => {
+const showPageTransition = (direction = 'forward', initial = false) => {
     const overlay = ensureTransitionOverlay();
     window.clearTimeout(transitionTimer);
-    overlay.classList.remove('is-active', 'is-back', 'is-forward');
+    window.clearTimeout(transitionReleaseTimer);
+    document.documentElement.classList.add('page-transition-pending');
+    overlay.classList.remove('is-active', 'is-back', 'is-forward', 'is-initial');
     void overlay.offsetWidth;
     overlay.classList.add('is-active', direction === 'back' ? 'is-back' : 'is-forward');
+    if (initial) overlay.classList.add('is-initial');
 };
 
 const hidePageTransition = () => {
     if (!transitionOverlay) return;
     transitionOverlay.classList.remove('is-active');
+    transitionReleaseTimer = window.setTimeout(() => {
+        document.documentElement.classList.remove('page-transition-pending');
+    }, 220);
     transitionTimer = window.setTimeout(() => {
         transitionOverlay?.classList.remove('is-back', 'is-forward');
     }, 500);
@@ -83,13 +90,17 @@ router.on('start', () => showPageTransition(navigationDirection));
 router.on('finish', () => {
     historyPosition = getHistoryPosition();
     navigationDirection = 'forward';
-    window.setTimeout(hidePageTransition, 1100);
+    window.setTimeout(hidePageTransition, 1400);
 });
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+// Run the branded logo formation on a full page refresh as well.
+showPageTransition('forward', true);
+window.setTimeout(hidePageTransition, 1400);
+
+const appName = import.meta.env.VITE_APP_NAME || 'Charles Agaloos';
 
 void createInertiaApp({
-    title: (title) => (title ? `${title} - ${appName}` : appName),
+    title: (title) => title || appName,
     progress: {
         color: '#4B5563',
     },
